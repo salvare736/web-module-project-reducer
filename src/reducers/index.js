@@ -1,4 +1,12 @@
-import { ADD_ONE, APPLY_NUMBER, CHANGE_OPERATION, CLEAR_DISPLAY } from './../actions';
+import {
+    ADD_ONE,
+    APPLY_NUMBER,
+    CHANGE_OPERATION,
+    CLEAR_DISPLAY,
+    SET_MEMORY,
+    CLEAR_MEMORY,
+    APPLY_MEMORY
+} from './../actions';
 
 export const initialState = {
     total: 0,
@@ -24,13 +32,11 @@ const reducer = (state, action) => {
                 ...state,
                 total: state.total + 1
             });
-
         case(APPLY_NUMBER):
             return ({ 
                 ...state, 
                 total: calculateResult(state.total, action.payload, state.operation)
             });
-        
         case(CHANGE_OPERATION):
             return ({
                 ...state,
@@ -40,6 +46,21 @@ const reducer = (state, action) => {
             return ({
                 ...state,
                 total: state.total = 0
+            });
+        case(SET_MEMORY):
+            return ({
+                ...state,
+                memory: state.memory = state.total
+            });
+        case(CLEAR_MEMORY):
+            return ({
+                ...state,
+                memory: state.memory = 0
+            });
+        case(APPLY_MEMORY):
+            return ({
+                ...state,
+                total: calculateResult(state.total, state.memory, state.operation)
             });
         default:
             return state;

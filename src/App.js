@@ -1,11 +1,20 @@
 import React, { useReducer } from 'react';
 import reducer, { initialState } from './reducers/index';
-import { addOne, applyNumber, changeOperation, clearDisplay } from './actions/index';
 
-import './App.css';
+import {
+  addOne,
+  applyNumber,
+  changeOperation,
+  clearDisplay,
+  setMemory,
+  clearMemory,
+  applyMemory
+} from './actions/index';
 
 import TotalDisplay from './components/TotalDisplay';
 import CalcButton from './components/CalcButton';
+
+import './App.css';
 
 function App() {
 
@@ -28,9 +37,9 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
-              <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton value={"M+"} onClick={() => dispatch(setMemory())}/>
+              <CalcButton value={"MR"} onClick={() => dispatch(applyMemory())}/>
+              <CalcButton value={"MC"} onClick={() => dispatch(clearMemory())}/>
             </div>
 
             <div className="row">
